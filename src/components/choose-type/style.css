@@ -1,0 +1,14 @@
+.inputSty {
+	display: inline-block;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	border-bottom: 1px solid #eee;
+}
+
+.btn {
+	margin: 10px auto;
+	width: 90%;
+	font-size: 14px;
+}
