@@ -1,5 +1,4 @@
 import {inType, outType} from '@/dict.js'
-
 export default {
   props: {
     type: String,
@@ -14,7 +13,6 @@ export default {
   mounted() {
     this.typeList = this.type === 'in' ? inType : outType
     if(this.value) {
-      console.log(this.value)
       this.selectedType = {...this.value}
     }
   },

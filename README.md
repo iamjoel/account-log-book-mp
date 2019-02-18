@@ -1,37 +1,31 @@
-# account-log-book-mp
+# 安全记账本 - 小程序版
+数据不会被窃取的个人记账本。数据都存在本地，需要时，可以灵活导出。 
 
-> A Mpvue project
 
-## Build Setup
+## 运行
+1 安装依赖：  
 
-``` bash
-# 初始化项目
-vue init mpvue/mpvue-quickstart myproject
-cd myproject
+1. `npm install`
 
-# 安装依赖
-yarn
+推荐用[Yarn](https://yarnpkg.com/en/docs/install):
+1. 安装 [Yarn](https://yarnpkg.com/en/docs/install)。
+1. `yarn install`。
 
-# 开发时构建
-npm dev
+2 启动 `npm run dev`
 
-# 打包构建
-npm build
+3 将本项目添加到微信
 
-# 指定平台的开发时构建(微信、百度、头条、支付宝)
-npm dev:wx
-npm dev:swan
-npm dev:tt
-npm dev:my
+## 注意点
+### 微信小程序
+不支持 `localStorage.getItem`, `localStorage.setItem`。 获取，设置本地缓存数据分别用 `wx.getStorageSync(string key)`, `wx.setStorageSync(string key, any data)` 。 设置的内容支持对象。
 
-# 指定平台的打包构建
-npm build:wx
-npm build:swan
-npm build:tt
-npm build:my
+### mpvue
+* 不支持 filter
+* 不支持在 template 内使用 methods 中的函数。可以用计算属性代替。
 
-# 生成 bundle 分析报告
-npm run build --report
-```
+### Vant Webapp
+van-button 不支持 size="large" 。。。
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 资源
+* [Vant Weapp](https://youzan.github.io/vant-weapp/#/intro)
+* [微信小程序 API](https://developers.weixin.qq.com/miniprogram/dev/api/)

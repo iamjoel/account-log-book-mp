@@ -1,7 +1,7 @@
 <template>
   <div class="main p-20rem">
     <div class="summary">
-      <div class="date">今日<small> <!-- {{today | time('YYYY年MM月DD日')}} --></small></div>
+      <div class="date">今日<span> {{todayStr}}</span></div>
       <div class="ly">
         <div class="lyi-f ly ly-j ly-m mr-20rem">
           <span>支出:</span> 
@@ -20,6 +20,7 @@
         size="large"
         round
         @click="show('out')"
+        style="flex-grow:1;"
       >
         记一笔支出
       </van-button>
@@ -31,13 +32,14 @@
         round
         plain
         @click="show('in')"
+        style="flex-grow:1;"
         >
         记一笔收入
       </van-button>
     </div>
-    
+
     <!-- 支出弹出 -->
-    <van-popup v-model="isShowOut" position="top">
+    <van-popup :show="isShowOut" position="top">
       <van-nav-bar
         title="记一笔支出"
         left-arrow
@@ -76,13 +78,13 @@
       </div>
       
       <div class="m-20 ly">
-        <van-button size="large"  round @click="isShowOut=false" class="mr-10rem">取消</van-button>
-        <van-button size="large" type="primary" round @click="save">保存</van-button>
+        <van-button size="large"  round @click="isShowOut=false" class="mr-10rem" style="flex-grow:1;">取消</van-button>
+        <van-button size="large" type="primary" round @click="save" style="flex-grow:1;">保存</van-button>
       </div>
     </van-popup>
-
+    
     <!-- 收入弹出 -->
-    <van-popup v-model="isShowIn" position="top">
+    <van-popup :show="isShowIn" position="top">
       <van-nav-bar
         title="记一笔收入"
         left-arrow
@@ -121,8 +123,8 @@
       </div>
       
       <div class="m-20 ly">
-        <van-button size="large"  round @click="isShowIn=false" class="mr-10rem">取消</van-button>
-        <van-button size="large" type="primary" round @click="save">保存</van-button>
+        <van-button size="large" round @click="isShowIn=false" class="mr-10rem" style="flex-grow:1;">取消</van-button>
+        <van-button size="large" type="primary" round @click="save" style="flex-grow:1;">保存</van-button>
       </div>
     </van-popup>
 
@@ -162,6 +164,11 @@ export default {
       curr: { // 当前记录的这笔
         ...logItemTemplate
       },
+    }
+  },
+  computed: {
+    todayStr() {
+      return moment(this.today).format('YYYY年MM月DD日')
     }
   },
   mounted() {
@@ -214,7 +221,6 @@ export default {
 
       // 设置组件的初始化状态
       this.$nextTick(() => {
-        console.log('show')
         if(type === 'in') {
           this.$refs.chooseInType.update(this.curr.classify)
         } else {
@@ -249,8 +255,7 @@ export default {
       } else {
         this.isShowOut = false
       }
-    },
-
+    }
   }
 }
 </script>

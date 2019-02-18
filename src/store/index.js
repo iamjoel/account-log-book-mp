@@ -29,12 +29,12 @@ import {inType, outType} from '@/dict.js'
 //   },
 // }
 
+debugger
 const state = {
   isShowFooter: true,
   activeTypeIndex: 0,
   // log: logData
-  // log: localStorage.getItem('log') ? JSON.parse(localStorage.getItem('log')) : {}
-  log: {}
+  log: wx.getStorageSync('log') || {}
 }
 
 export default new Vuex.Store({

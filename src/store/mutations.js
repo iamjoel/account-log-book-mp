@@ -37,11 +37,11 @@ const mutations = {
     const day = date.date()
 
     log[year][month][day].push(payload)
-    localStorage.setItem('log', JSON.stringify(log)) // 同步
+    wx.setStorageSync('log', log) // 同步
   },
   clearData(state) {
     state.log = {}
-    localStorage.setItem('log', JSON.stringify({})) // 同步
+    wx.getStorageSync('log', {}) // 同步
   }
 }
 
