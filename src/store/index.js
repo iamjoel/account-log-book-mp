@@ -29,7 +29,6 @@ import {inType, outType} from '@/dict.js'
 //   },
 // }
 
-debugger
 const state = {
   isShowFooter: true,
   activeTypeIndex: 0,

@@ -58,7 +58,7 @@
       <div class="mh-20">
         <h2 class="title">金额</h2>
           <van-field
-            v-model.number="curr.value"
+            @change="moneyChange"
             placeholder="请输入金额"
             type="number"
             required
@@ -103,7 +103,7 @@
       <div class="mh-20">
         <h2 class="title">金额</h2>
           <van-field
-            v-model.number="curr.value"
+            @change="moneyChange"
             placeholder="请输入金额"
             type="number"
             required
@@ -127,14 +127,18 @@
         <van-button size="large" type="primary" round @click="save" style="flex-grow:1;">保存</van-button>
       </div>
     </van-popup>
-
+    
+    <van-toast id="van-toast" />
+    <tabbar :activeIndex="0" />
   </div>
 </template>
 
 <script>
 
 import moment from 'moment'
+import Toast from '@/../static/vant/toast/toast'
 import ChooseType from '@/components/choose-type'
+import tabbar from '@/components/tabbar'
 import {inType, outType} from '@/dict.js'
 import store from '@/store'
 
@@ -152,7 +156,8 @@ const day = today.date()
 
 export default {
   components: {
-    ChooseType
+    ChooseType,
+    tabbar
   },
   data() {
     return {
@@ -228,13 +233,16 @@ export default {
         }
       })
     },
+    moneyChange(event) {
+      this.curr.value = event.mp.detail
+    },
     valid(item) {
       var errMsg = null
       if(!item.value) {
         errMsg = '请输入金额'
       }
       if(errMsg) {
-        this.$toast(errMsg)
+        Toast(errMsg)
         return false
       } else {
         return true
