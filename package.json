@@ -23,10 +23,12 @@
     "build": "node build/build.js wx"
   },
   "dependencies": {
+    "@antv/f2": "^3.3.5",
     "css-utils-collection": "^1.5.1",
     "moment": "^2.24.0",
     "mpvue": "^2.0.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "xlsx": "^0.14.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

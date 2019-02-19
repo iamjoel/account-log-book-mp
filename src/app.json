@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    "pages/statistics/main",
+    "pages/data-center/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

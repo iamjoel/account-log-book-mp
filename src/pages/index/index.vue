@@ -42,8 +42,6 @@
     <van-popup :show="isShowOut" position="top">
       <van-nav-bar
         title="记一笔支出"
-        left-arrow
-        @click-left="isShowOut=false"
       />
       
       <div class="mh-20">
@@ -78,7 +76,7 @@
       </div>
       
       <div class="m-20 ly">
-        <van-button size="large"  round @click="isShowOut=false" class="mr-10rem" style="flex-grow:1;">取消</van-button>
+        <van-button size="large" round @click="isShowOut=false" class="mr-10rem" style="flex-grow:1;">取消</van-button>
         <van-button size="large" type="primary" round @click="save" style="flex-grow:1;">保存</van-button>
       </div>
     </van-popup>
@@ -87,8 +85,6 @@
     <van-popup :show="isShowIn" position="top">
       <van-nav-bar
         title="记一笔收入"
-        left-arrow
-        @click-left="isShowIn=false"
       />
       
       <div class="mh-20">
@@ -129,7 +125,7 @@
     </van-popup>
     
     <van-toast id="van-toast" />
-    <tabbar :activeIndex="0" />
+    <tabbar :active-index="0" />
   </div>
 </template>
 

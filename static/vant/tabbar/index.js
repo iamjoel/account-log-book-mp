@@ -62,6 +62,7 @@ VantComponent({
       var active = this.data.items.indexOf(child);
 
       if (active !== this.data.currentActive && active !== -1) {
+        debugger
         this.$emit('change', active);
         this.setData({
           currentActive: active
