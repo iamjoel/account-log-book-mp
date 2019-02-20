@@ -14,6 +14,7 @@ VantComponent({
   },
   methods: {
     onClickLeft: function onClickLeft() {
+      debugger
       this.$emit('click-left');
     },
     onClickRight: function onClickRight() {

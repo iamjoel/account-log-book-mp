@@ -8,7 +8,7 @@
         @click="isShowSelectTime = true"
       />
     </van-cell-group>
-    <van-popup v-model="isShowSelectTime" position="bottom">
+    <van-popup :show="isShowSelectTime" position="bottom">
       <van-picker
         show-toolbar
         title="时间"
@@ -20,7 +20,7 @@
 
     <van-tabs 
       @change="dataViewChange"
-      v-model="activeDataViewIndex"
+      :active="activeDataViewIndex"
       type="card" class="mt-20rem" color="#67b836"
     >
       <van-tab title="概览" >
@@ -50,33 +50,35 @@
           >
             明细
           </van-button>
-          <van-popup v-model="isShowDetail" position="right">
+          <van-popup :show="isShowDetail" position="right">
             <div class="full">
               <van-nav-bar
                 left-arrow
                 :title="activeDateLabel + '明细'"
-                @click-left="isShowDetail=false"
+                @click-left="hide('Detail')"
               />
+              {{isShowDetail}}
               <table class="table">
-                <thead>
+                <thead class="ly">
                   <th>日期</th>
                   <th>金额</th>
                   <th>类别</th>
                   <th>注释</th>
                 </thead>
                 <tbody>
-                  <tr v-for="(item, i) in activeMonthPlainData" :key="i">
-                    <td>{{padZero(item.day)}}</td>
+                  <tr v-for="(item, i) in activeMonthPlainData" :key="i" class="ly">
+                    <td>{{days[i]}}</td>
                     <td
                       :class="[item.type === 'in' ? 'green' : 'red']"
                     >
                       {{(item.type === 'in' ? '+' : '-') + item.value}}
                     </td>
                     <td>{{item.classify.name}}</td>
-                    <td>{{item.comment}}</td>
+                    <td>{{item.comment || ''}}</td>
                   </tr>
                 </tbody>
               </table>
+
             </div>
           </van-popup>
         </div>
@@ -86,7 +88,7 @@
       </van-tab>
     </van-tabs>
 
-    <van-popup v-model="isShowOut" position="right">
+    <van-popup :show="isShowOut" position="right">
       <div class="full">
         <van-nav-bar
           left-arrow
@@ -99,7 +101,7 @@
       </div>
     </van-popup>
 
-    <van-popup v-model="isShowIn" position="right">
+    <van-popup :show="isShowIn" position="right">
       <div class="full">
         <van-nav-bar
           left-arrow
@@ -139,6 +141,7 @@ export default {
       activeDate: moment(), // 当前统计是时间
       activeDateLabel: '本月',
       activeMonthPlainData: [],
+      days: [],
       activeDataViewIndex: 0,
       isShowDetail: true,
       outMonthValue: 0,
@@ -160,6 +163,10 @@ export default {
   methods: {
     padZero(num) {
       return parseInt(num, 10) < 10 ? `0${num}` : num
+    },
+    hide(type) {
+      // debugger 为什么无效呢
+      this[`isShow${type}`] = false
     },
     selectTimeChange(value, index) {
       this.activeDate = index === 0 ? this.currDate : this.prevMonthDate
@@ -189,6 +196,7 @@ export default {
     renderClassifyChart(type) {
       var activeType = type === 'in' ? inType : outType
       var activeMonthData = this.activeMonthPlainData.filter(item => item.type === type)
+
       
       var allTotal = 0
       var data = activeType
@@ -429,6 +437,7 @@ export default {
       var year = this.activeDate.year()
       var month = this.activeDate.month() + 1
       this.activeMonthPlainData = getPlainMonthData(store.state.log, year, month)
+      this.days = this.activeMonthPlainData.map(item => this.padZero(item.day))
       this.outMonthValue = getMonthValue(this.activeMonthPlainData, 'out')
       this.inMonthValue = getMonthValue(this.activeMonthPlainData, 'in')
     }
@@ -495,6 +504,8 @@ function drawLabel(shape, coord, canvas) {
   shape.label = group;
 }
 </script>
+
+<style src="css-utils-collection"></style>
 <style>
   .statistics-page .van-tabs__nav--card {
     margin: 0;

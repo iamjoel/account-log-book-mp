@@ -20,7 +20,6 @@
 不支持 `localStorage.getItem`, `localStorage.setItem`。 获取，设置本地缓存数据分别用 `wx.getStorageSync(string key)`, `wx.setStorageSync(string key, any data)` 。 设置的内容支持对象。
 
 
-
 ### mpvue
 * 不支持 filter
 * 不支持在 template 内使用 methods 中的函数。可以用计算属性代替。
@@ -29,6 +28,7 @@
 ### Vant Webapp
 * van-button 不支持 size="large" 。。。
 * 不支持 `v-model`
+* vant组件里明明触发了`click-left` 事件，但为什么不进入父组件绑定的 `click-left` 的回调呢？会不会是因为 `handleProxy` 原因?
 
 组件中使用 Vant 组件，只能在用该组件的页面中用引入需要的 Vant 组件。
 
