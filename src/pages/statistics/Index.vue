@@ -57,7 +57,6 @@
                 :title="activeDateLabel + '明细'"
                 @click-left="hide('Detail')"
               />
-              {{isShowDetail}}
               <table class="table">
                 <thead class="ly">
                   <th>日期</th>
@@ -78,6 +77,10 @@
                   </tr>
                 </tbody>
               </table>
+              
+              <div class="ly ly-c mt-10">
+                <van-button type="default" @click="hide('Detail')">返回</van-button>
+              </div>
 
             </div>
           </van-popup>
